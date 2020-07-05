@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Card,
          CardContent,
          CardActions,
@@ -8,6 +9,7 @@ import { AccessTimeRounded } from '@material-ui/icons'
 import * as moment from 'moment'
 
 import Carroussell from './carrousell'
+import Modal from './modal'
 
 const useStyles = makeStyles(theme => ({
  root: {
@@ -57,7 +59,8 @@ const useStyles = makeStyles(theme => ({
         width: 1400,
         height: 100,
         padding: 0,
-    }
+    },
+    
 }))
 const style = {
     superhighlight: {
@@ -71,7 +74,11 @@ const style = {
     }
 }
 
-export default ({card}) => {
+
+
+
+export default function ({card}) {
+ const [ open, setOpen ] = useState(false)   
  const classes = useStyles()
  const publish_date = moment(Date.now()).diff(moment(card.publish_date, "DD/MM/YYYY").format('MM-DD-YYYY'), 'days')
  
@@ -85,7 +92,15 @@ export default ({card}) => {
              return style.simple         
      }
  }
+ const handleOpen = () => {
+    setOpen(true)
+ }
+
+ const handleClose = () => {
+    setOpen(false)
+ }
  
+
  return (
      <Card style={publicationPlan(card.publication_plan)} 
             className={classes.root} variant="outlined">
@@ -122,15 +137,20 @@ export default ({card}) => {
                                                 variant='subtitle2'>
                              <AccessTimeRounded fontSize="small"/> 
                             {
-                                publish_date > 1 && `publicado hace  ${publish_date} dias` || 
+                                publish_date > 1 && `publicado hace ${publish_date} dias` || 
                                 publish_date === 1 && `publicado hace ${publish_date} dia` ||
                                 publish_date === 0  && `publicado hoy`
                             } 
                                               </Typography>
                         }
-                        <Button variant='contained' size='small' color='primary'>
+                        <Button 
+                             variant='contained'
+                             size='small'
+                             color='primary'
+                             onClick={handleOpen}>
                             Contactar
                         </Button>
+                     <Modal isOpen={open} handleClose={handleClose} />
                     </CardActions>
                 </div> 
             </CardContent>
