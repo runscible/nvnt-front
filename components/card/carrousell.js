@@ -8,19 +8,13 @@ import { ArrowBack, ArrowForward } from '@material-ui/icons'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-const mockImages = [
-    "https://preprostatic.zonapropcdn.com/avisos/1/00/44/55/79/81/360x266/1693121343.jpg",
-    "https://preprostatic.zonapropcdn.com/avisos/1/00/44/55/41/44/360x266/1693069558.jpg",
-    "https://preprostatic.zonapropcdn.com/avisos/1/00/44/18/69/48/360x266/1688441607.jpg"
-]
-
 const useStyles = makeStyles({
     img: {
-        height: 150,
+        height: 200,
     }, 
     containerSlide: {
         position: 'relative',
-        maxWidth: 600,
+        width: '100%',
         margin: 'auto'
     },
     buttonLeft: {
@@ -49,6 +43,14 @@ const useStyles = makeStyles({
     ContainerPrice: {
         paddingBottom: 0,
         paddingLeft: 10
+    },
+    price: {
+        fontWeight: '600',
+        fontFamily: ' "Roboto", "Helvetica", "Arial", sans-serif',
+        fontSize: 20
+    },
+    expenses: {
+
     }
 })
 
@@ -81,12 +83,16 @@ export default ({data}) => {
                     </ButtonNext>
                 </div>
                 <div className={classes.ContainerPrice}>
-                    <Typography >
-                    {`${posting_prices[0].price.currency}, ${posting_prices[0].price.amount}` }
+                    <Typography className={classes.price}>
+                    {`${ posting_prices[0].price.currency === 'USD' && 
+                         'Usd' || '$'   
+                        } ${posting_prices[0].price.amount}` } 
                     </Typography>
-                    <Typography >
+                    <Typography className={classes.expenses}>
                         { posting_prices[0].expenses && 
-                            `${posting_prices[0].expenses.currency}, ${posting_prices[0].expenses.amount}` }
+                            `+ ${posting_prices[0].expenses.currency === 'USD' && 
+                                'Usd' || '$'
+                          } ${posting_prices[0].expenses.amount} expensas` }
                     </Typography>
                 </div>    
             </CarouselProvider>

@@ -26,11 +26,16 @@ export default function() {
     const handleChange = event => {
         const { initialState } = state
         
-        dispatch({type: SELECT_TYPE, payload: {
+        event.target.value !== '0' && dispatch({type: SELECT_TYPE, payload: {
            operationType: event.target.value,
-            results: initialState.data.filter( val =>
+           results: initialState.data.filter( val =>
                      val.posting_prices.some(val_filter =>
                          `${val_filter.operation_type}` === event.target.value ) )  
+        }})
+
+        event.target.value === '0' && dispatch({ type: SELECT_TYPE, payload: {
+            operationType: event.target.value,
+            results: initialState.data
         }})
     }
     const { operationType } = state
@@ -67,5 +72,14 @@ export default function() {
                         Temporal
                     </p>
                </div>
+                <div className={classes.item}>
+                    <Radio
+                        checked={operationType === '0'}
+                        onChange={handleChange}
+                        value='0' />
+                    <p>
+                        Todos
+                    </p>
+                </div>
            </div> 
 }

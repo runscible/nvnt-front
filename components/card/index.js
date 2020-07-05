@@ -4,20 +4,16 @@ import { Card,
          Button,
          Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-
-import CommonContext from '../../components/commonContext'
+import { AccessTimeRounded } from '@material-ui/icons'
 import * as moment from 'moment'
 
 import Carroussell from './carrousell'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
  root: {
-     minWidth: 700,
-     maxWidth: 1000,
-     minHeight: 200,
-     maxHeight: 300,
+     width: 1000,
      padding: 0,
-     marginBottom: 10
+     marginBottom: 10,
     },
     content: {
         display: 'flex',
@@ -28,21 +24,22 @@ const useStyles = makeStyles({
         },
     },
     actionsContainer: {
-        borderLeft: 'solid #888999 1px',  
+        borderLeft: 'solid #888999 1px',
+        minWidth: 300,
+        height: 200,  
         display: 'flex',
         flexDirection: 'column',
         paddingTop: 10,
         paddingLeft: 10,
         paddingRight: 10,
-        paddingBottom: 0,
   },
   title: {
       color: '#2f7dfa',
       fontWeight: 600
   }, 
   contentInfo: {
-      paddingTop: 30,
-      paddingBottom: 30,
+      paddingTop: 10,
+      paddingBottom: 10,
   },
   actions: {
       flex: 1,
@@ -50,17 +47,48 @@ const useStyles = makeStyles({
       justifyContent: 'space-between',
       paddingLeft: 0,
       paddingRight: 0,
+      '& svg': {
+          top: 5,
+          position: 'relative', 
+          marginRight: 5
+      }
   },
     carroussell: {
-        width: 900,
+        width: 1400,
+        height: 100,
+        padding: 0,
     }
-})
+}))
+const style = {
+    superhighlight: {
+        borderTop: 'solid #8b6bd1'
+    },
+    highlight: {
+        borderTop: 'solid #58dbbf'
+    },
+    simple: {
+        borderTop: 'none'
+    }
+}
 
 export default ({card}) => {
  const classes = useStyles()
  const publish_date = moment(Date.now()).diff(moment(card.publish_date, "DD/MM/YYYY").format('MM-DD-YYYY'), 'days')
+ 
+ const publicationPlan = plan => {
+     switch(plan) {
+         case 'SUPERHIGHLIGHTED': 
+             return style.superhighlight
+         case 'HIGHLIGHTED':
+             return style.highlight
+         default:
+             return style.simple         
+     }
+ }
+ 
  return (
-     <Card className={classes.root}>
+     <Card style={publicationPlan(card.publication_plan)} 
+            className={classes.root} variant="outlined">
             <CardContent className={classes.content}>
                 <div className={classes.carroussell}>
                  <Carroussell data={{
@@ -82,18 +110,23 @@ export default ({card}) => {
                             className={classes.contentInfo}
                             variant='body2'
                             component='p'>
-                            { card.posting_description }
+                            {      
+                            card.posting_description.length <= 450 && 
+                                card.posting_description ||
+                                `${card.posting_description.slice(0, 450)}...`
+                            }
                         </Typography>
                     <CardActions className={classes.actions}>
                         {
                          card.publish_date && <Typography
                                                 variant='subtitle2'>
+                             <AccessTimeRounded fontSize="small"/> 
                             {
-                                publish_date > 1 &&  `publicado hace  ${publish_date} dias` || 
+                                publish_date > 1 && `publicado hace  ${publish_date} dias` || 
                                 publish_date === 1 && `publicado hace ${publish_date} dia` ||
                                 publish_date === 0  && `publicado hoy`
                             } 
-                                            </Typography>
+                                              </Typography>
                         }
                         <Button variant='contained' size='small' color='primary'>
                             Contactar
