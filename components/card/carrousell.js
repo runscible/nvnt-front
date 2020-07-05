@@ -84,15 +84,17 @@ export default ({data}) => {
                 </div>
                 <div className={classes.ContainerPrice}>
                     <Typography className={classes.price}>
-                    {`${ posting_prices[0].price.currency === 'USD' && 
-                         'Usd' || '$'   
-                        } ${posting_prices[0].price.amount}` } 
+                    {
+                        `${ posting_prices[0].price.currency === 'USD' && 'Usd' || '$' }
+                         ${posting_prices[0].price.amount}`
+                    } 
                     </Typography>
                     <Typography className={classes.expenses}>
-                        { posting_prices[0].expenses && 
-                            `+ ${posting_prices[0].expenses.currency === 'USD' && 
-                                'Usd' || '$'
-                          } ${posting_prices[0].expenses.amount} expensas` }
+                    { 
+                        posting_prices[0].expenses && 
+                            `+ ${posting_prices[0].expenses.currency === 'USD' &&  'Usd' || '$' }
+                            ${posting_prices[0].expenses.amount} expensas`
+                    }
                     </Typography>
                 </div>    
             </CarouselProvider>

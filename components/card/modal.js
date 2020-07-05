@@ -21,15 +21,12 @@ const useStyles = makeStyles(theme => ({
             margin: 5,
         }
     },
-    email: {
-        
-    },
     personalInfo: {
         display: 'flex',
         flexDirection: 'row'
     },
-    message: {
-
+    button: {
+        color: '#FFF',
     }
 }))
 
@@ -65,6 +62,7 @@ export default function ({isOpen, handleClose}) {
                 helperText="mensaje"
                 required />
             <Button
+                className={classes.button}
                 variant='contained'
                 color='primary'>
                     Contactar anunciante
@@ -75,8 +73,7 @@ export default function ({isOpen, handleClose}) {
                 open={isOpen}
                 onClose={handleClose}
                 aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-            >
-                {body}
+                aria-describedby="simple-modal-description" >
+                { body }
             </Modal>
 }

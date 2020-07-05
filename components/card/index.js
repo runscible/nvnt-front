@@ -60,7 +60,10 @@ const useStyles = makeStyles(theme => ({
         height: 100,
         padding: 0,
     },
-    
+    button: {
+        color: '#FFF',
+        fontWeight: 600
+    }    
 }))
 const style = {
     superhighlight: {
@@ -144,6 +147,7 @@ export default function ({card}) {
                                               </Typography>
                         }
                         <Button 
+                             className={classes.button}   
                              variant='contained'
                              size='small'
                              color='primary'
