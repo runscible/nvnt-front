@@ -25,11 +25,12 @@ export default function() {
     const { state, dispatch } = useContext(CommonContext)
     const handleChange = event => {
         const { initialState } = state
+        
         dispatch({type: SELECT_TYPE, payload: {
            operationType: event.target.value,
             results: initialState.data.filter( val =>
                      val.posting_prices.some(val_filter =>
-                     val_filter.operation_type == event.target.value ) )  
+                         `${val_filter.operation_type}` === event.target.value ) )  
         }})
     }
     const { operationType } = state
@@ -43,7 +44,7 @@ export default function() {
                    <Radio 
                     checked={operationType === '1'}
                     onChange={handleChange}
-                    value={1} />
+                    value='1' />
                     <p>
                         Alquilar
                     </p>        
@@ -52,7 +53,7 @@ export default function() {
                    <Radio 
                     checked={operationType === '2'}
                     onChange={handleChange}
-                    value={2} />
+                    value='2' />
                     <p>
                         Comprar
                     </p>    
@@ -61,7 +62,7 @@ export default function() {
                     <Radio
                     checked={operationType === '3'}
                     onChange={handleChange}
-                    value={3} />
+                    value='3' />
                     <p>
                         Temporal
                     </p>

@@ -52,16 +52,17 @@ const useStyles = makeStyles({
     }
 })
 
-export default () => {
+export default ({data}) => {
         const classes = useStyles()
+        const { pictures, posting_prices } = data    
         return <CarouselProvider
             naturalSlideWidth={10}
             naturalSlideHeight={5}
-            totalSlides={mockImages.length}>
+            totalSlides={pictures.length}>
                 <div className={classes.containerSlide}>
                     <Slider>
                     {
-                        mockImages.map((val, index) => 
+                        pictures.map((val, index) => 
                         <Slide 
                             key={index}
                             index={index}>
@@ -81,10 +82,11 @@ export default () => {
                 </div>
                 <div className={classes.ContainerPrice}>
                     <Typography >
-                        Las golondrina
+                    {`${posting_prices[0].price.currency}, ${posting_prices[0].price.amount}` }
                     </Typography>
                     <Typography >
-                        Las golondrina se los arcos.
+                        { posting_prices[0].expenses && 
+                            `${posting_prices[0].expenses.currency}, ${posting_prices[0].expenses.amount}` }
                     </Typography>
                 </div>    
             </CarouselProvider>

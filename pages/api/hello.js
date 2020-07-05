@@ -39,7 +39,7 @@ const postings = [
     ],
     operation_type: { operation_type_id: 2, operation_type_name: "Venta" },
     publication_plan: "SUPERHIGHLIGHTED",
-    publish_date: "18/07/2019",
+    publish_date: "04/07/2020",
     posting_status: { status: "AVAILABLE", label: "Disponible" },
     title: "Dueño San Lorenzo/Güemes. LC  2 d, a balcón terraza a jardín. A nvo. cochera",
     posting_picture: "https://preprostatic.zonapropcdn.com/avisos/1/00/44/55/41/44/360x266/1693069558.jpg",

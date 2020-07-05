@@ -25,7 +25,7 @@ export default function () {
     return <div className={classes.root}>
                 <Filter className={classes.filter} />
                 <div className={classes.cards}>
-                    { state.results && state.results.data.map((val, index) => <Card key={ index }/> ) }
+                    { state.results && state.results.data.map((val, index) => <Card key={ index } card={val}/> ) }
                 </div>
             </div>
 }       

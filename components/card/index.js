@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { Card,
          CardContent,
          CardActions,
@@ -7,6 +6,8 @@ import { Card,
 import { makeStyles } from '@material-ui/core/styles'
 
 import CommonContext from '../../components/commonContext'
+import * as moment from 'moment'
+
 import Carroussell from './carrousell'
 
 const useStyles = makeStyles({
@@ -55,36 +56,45 @@ const useStyles = makeStyles({
     }
 })
 
-export default () => {
- const classes = useStyles()   
- const { state } = useContext(CommonContext) 
+export default ({card}) => {
+ const classes = useStyles()
+ const publish_date = moment(Date.now()).diff(moment(card.publish_date, "DD/MM/YYYY").format('MM-DD-YYYY'), 'days')
  return (
      <Card className={classes.root}>
             <CardContent className={classes.content}>
                 <div className={classes.carroussell}>
-                    <Carroussell />
+                 <Carroussell data={{
+                     pictures: [card.posting_picture],
+                     posting_prices: card.posting_prices
+                 }}/>
                 </div>   
                 <div className={classes.actionsContainer}>
                         <Typography
                             className={classes.title}
                             variant='body2'>
-                            La quemadas grupos árboles perfil.
+                        {card.title }
                         </Typography >
                         <Typography
                             variant='subtitle2'>
-                            Término para olvidando el con para.    
+                        {`${card.posting_location.address}, ${card.posting_location.zone}` }    
                         </Typography>
                         <Typography 
                             className={classes.contentInfo}
                             variant='body2'
                             component='p'>
-                            Es tierra ceniza pasan me encuentro húmedo en lenguas cosas. Sus los tierra nunca con que tierra latido aire quedo, quedo la quemadas ansioso de las pisan que tierra transparente. La faraón un y ansioso me me cielo bajo nube. Diminutas que el ligeros de los. Vacía los bajo escaleras.
+                            { card.posting_description }
                         </Typography>
                     <CardActions className={classes.actions}>
-                        <Typography
-                        variant='subtitle2'>
-                            Término para olvidando el con para.
-                        </Typography>
+                        {
+                         card.publish_date && <Typography
+                                                variant='subtitle2'>
+                            {
+                                publish_date > 1 &&  `publicado hace  ${publish_date} dias` || 
+                                publish_date === 1 && `publicado hace ${publish_date} dia` ||
+                                publish_date === 0  && `publicado hoy`
+                            } 
+                                            </Typography>
+                        }
                         <Button variant='contained' size='small' color='primary'>
                             Contactar
                         </Button>
