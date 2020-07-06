@@ -7,7 +7,6 @@ import { SELECT_TYPE } from '../constants'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(2),
         display: 'flex',
         flexDirection: 'column',
     }, 
@@ -43,7 +42,7 @@ export default function() {
                <Typography
                 variant="subtitle2"
                 component="strong">
-                    Tipo de operacion 
+                    Tipo de operación 
                </Typography> 
                <div className={classes.item}>
                    <Radio 

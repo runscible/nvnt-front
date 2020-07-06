@@ -21,14 +21,20 @@ const useStyles = makeStyles(theme => ({
         }
 
     },
+    title: {
+        paddingBottom: 10,
+        fontWeight: 600,
+        
+    }
 }))
 
 export default function() {
     const classes = useStyles()
     return <div className={classes.root}> 
              <Typography
+                className={classes.title}                
                 variant="subtitle2" >
-                 Direccion
+                 Dirección
              </Typography>
              <div className={classes.searcher}>
                 <TextField

@@ -13,7 +13,12 @@ const useStyles = makeStyles( theme => ({
             width: theme.spacing(33),
             height: theme.spacing(50),
             padding: theme.spacing(1),
-        },           
+        },
+        '& strong': {
+            padding: 10,
+            fontWeight: 600,
+            fontSize: 15
+        }           
     },
 }))
 export default function () {
@@ -27,6 +32,7 @@ export default function () {
                     </Typography>
                     <hr />
                     <Searcher />
+                    <hr />
                     <Checkgroup />
                     <hr />
                 </Paper>
